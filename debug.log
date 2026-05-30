@@ -1,0 +1,14 @@
+[113756:113428:0530/202627.346:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.v58.filemap.sogouime
+[113756:113428:0530/202627.346:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
+[113756:113428:0530/202627.346:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:58
+[113756:113428:0530/202627.379:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi120.v58.filemap.sogouime
+[113756:113428:0530/202627.379:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:58
+[113756:113428:0530/202627.379:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:58
+[113756:34224:0530/202627.515:WARNING:n_flashIPCUtil.cpp(124)] n_flashIPCUtil::IPCNSync t_flashStubImpl::CreateControl
+[44808:64952:0530/202649.638:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.v58.filemap.sogouime
+[44808:64952:0530/202649.638:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:1
+[44808:64952:0530/202649.638:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:58
+[44808:64952:0530/202649.671:WARNING:t_skinfilemap.cpp(63)] SGRenderLog:CheckUpdate newMem.OpenMem Suc, szNewMem:Local\sgime_skin.Dpi120.v58.filemap.sogouime
+[44808:64952:0530/202649.671:WARNING:t_skinfilemap.cpp(65)] SGRenderLog:CheckUpdate finish: old version:58
+[44808:64952:0530/202649.671:WARNING:t_skinfilemap.cpp(67)] SGRenderLog:CheckUpdate finish: new version:58
+[44808:89292:0530/202649.796:WARNING:n_flashIPCUtil.cpp(124)] n_flashIPCUtil::IPCNSync t_flashStubImpl::CreateControl
