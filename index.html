@@ -2,6 +2,7 @@
 layout: default
 title : Homepage
 navbar_title: 首页
+container_class: container-fluid
 ---
 
 <style>
@@ -40,11 +41,12 @@ navbar_title: 首页
 }
 
 .hero-container {
-  max-width: 700px;
+  max-width: 900px;
   width: 100%;
   text-align: center;
   position: relative;
   z-index: 1;
+  padding: 0 1.5rem;
 }
 
 /* Avatar */
@@ -86,8 +88,8 @@ navbar_title: 首页
 }
 
 .hero-avatar {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #ffffff;
@@ -97,20 +99,29 @@ navbar_title: 首页
 
 /* Name */
 .hero-name {
-  font-size: 3rem;
+  font-size: 2.75rem;
   font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 0.5rem;
+  color: #0F172A;
+  margin-bottom: 0.25rem;
   letter-spacing: -0.02em;
   line-height: 1.2;
   opacity: 0;
   animation: slideUp 0.6s ease-out 0.2s forwards;
 }
 
+.hero-name-en {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #94A3B8;
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  animation: slideUp 0.6s ease-out 0.25s forwards;
+}
+
 /* Position */
 .hero-position {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.35rem;
+  font-weight: 700;
   color: #2563EB;
   margin-bottom: 0.75rem;
   opacity: 0;
@@ -122,8 +133,8 @@ navbar_title: 首页
   font-size: 1rem;
   color: #475569;
   margin-bottom: 1.5rem;
-  line-height: 1.6;
-  max-width: 520px;
+  line-height: 1.7;
+  max-width: 560px;
   margin-left: auto;
   margin-right: auto;
   opacity: 0;
@@ -145,12 +156,12 @@ navbar_title: 首页
   display: inline-flex;
   align-items: center;
   padding: 0.375rem 0.875rem;
-  background: #eff6ff;
+  background: #EFF6FF;
   color: #2563EB;
   font-size: 0.8125rem;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 9999px;
-  border: 1px solid #dbeafe;
+  border: 1px solid #BFDBFE;
   transition: all 0.2s ease;
 }
 
@@ -161,49 +172,6 @@ navbar_title: 首页
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
-/* Stats */
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: slideUp 0.6s ease-out 0.45s forwards;
-}
-
-.stat-item {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
-  padding: 1rem 1.25rem;
-  min-width: 110px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.stat-item:hover {
-  border-color: #bfdbfe;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
-  transform: translateY(-2px);
-}
-
-.stat-number {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #2563EB;
-  line-height: 1;
-  margin-bottom: 0.25rem;
-}
-
-.stat-label {
-  font-size: 0.75rem;
-  color: #64748B;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 /* CTA Buttons */
 .hero-cta {
   display: flex;
@@ -211,7 +179,7 @@ navbar_title: 首页
   gap: 0.75rem;
   flex-wrap: wrap;
   opacity: 0;
-  animation: slideUp 0.6s ease-out 0.5s forwards;
+  animation: slideUp 0.6s ease-out 0.45s forwards;
 }
 
 .btn-primary {
@@ -223,7 +191,7 @@ navbar_title: 首页
   color: #ffffff;
   font-size: 0.9375rem;
   font-weight: 600;
-  border-radius: 0.625rem;
+  border-radius: 12px;
   text-decoration: none;
   border: none;
   cursor: pointer;
@@ -247,7 +215,7 @@ navbar_title: 首页
   color: #0F172A;
   font-size: 0.9375rem;
   font-weight: 600;
-  border-radius: 0.625rem;
+  border-radius: 12px;
   text-decoration: none;
   border: 1.5px solid #CBD5E1;
   cursor: pointer;
@@ -263,7 +231,430 @@ navbar_title: 首页
   text-decoration: none;
 }
 
-/* Animations */
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #94A3B8;
+  font-size: 0.75rem;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.8s forwards;
+}
+
+.scroll-indicator i {
+  font-size: 1.25rem;
+  animation: bounce 2s infinite;
+}
+
+/* ===== Stats Section ===== */
+.stats-section {
+  padding: 3rem 1rem;
+  background: #F8FAFC;
+}
+
+.stats-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 0 1.5rem;
+}
+
+.stats-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stats-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
+  border-color: #BFDBFE;
+}
+
+.stats-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #2563EB;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stats-label {
+  font-size: 0.8125rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+/* ===== Section Common ===== */
+.section {
+  padding: 4rem 1.5rem;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: #64748B;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* ===== About Section ===== */
+.about-section-bg {
+  background: #FFFFFF;
+}
+
+.about-content {
+  color: #475569;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.about-content p {
+  margin-bottom: 1rem;
+}
+
+.about-content p:last-child {
+  margin-bottom: 0;
+}
+
+.about-content strong {
+  color: #0F172A;
+  font-weight: 600;
+}
+
+/* ===== Skills Section ===== */
+.skills-section-bg {
+  background: #F8FAFC;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.skill-category-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-category-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
+  border-color: #BFDBFE;
+}
+
+.skill-category-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skill-category-title i {
+  color: #2563EB;
+  font-size: 1rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  padding: 0.375rem 0.875rem;
+  background: #EFF6FF;
+  color: #2563EB;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid #BFDBFE;
+  transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+  background: #2563EB;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ===== Projects Section ===== */
+.projects-section-bg {
+  background: #FFFFFF;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 1.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
+  border-color: #BFDBFE;
+}
+
+.project-icon {
+  width: 48px;
+  height: 48px;
+  background: #EFF6FF;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.project-icon i {
+  color: #2563EB;
+  font-size: 1.25rem;
+}
+
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 0.5rem;
+}
+
+.project-desc {
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+.project-tech-tag {
+  padding: 0.25rem 0.625rem;
+  background: #F8FAFC;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid #E2E8F0;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.project-links a {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #2563EB;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.project-links a:hover {
+  color: #1D4ED8;
+  text-decoration: underline;
+}
+
+/* ===== Experience Timeline ===== */
+.experience-section-bg {
+  background: #F8FAFC;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: #E2E8F0;
+  border-radius: 1px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -1.5rem;
+  top: 0.375rem;
+  width: 10px;
+  height: 10px;
+  background: #2563EB;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 0 2px #BFDBFE;
+  transform: translateX(-4px);
+}
+
+.timeline-content {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  border-color: #BFDBFE;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+}
+
+.timeline-date {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #2563EB;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-company {
+  font-size: 0.875rem;
+  color: #64748B;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.timeline-list li {
+  font-size: 0.875rem;
+  color: #475569;
+  padding: 0.25rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.timeline-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.625rem;
+  width: 5px;
+  height: 5px;
+  background: #BFDBFE;
+  border-radius: 50%;
+}
+
+/* ===== Contact Section ===== */
+.contact-section-bg {
+  background: #FFFFFF;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
+  border-color: #BFDBFE;
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-card i {
+  font-size: 1.5rem;
+  color: #2563EB;
+  margin-bottom: 0.75rem;
+}
+
+.contact-card-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0F172A;
+  margin-bottom: 0.25rem;
+}
+
+.contact-card-value {
+  font-size: 0.8125rem;
+  color: #64748B;
+}
+
+/* ===== Animations ===== */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -280,34 +671,13 @@ navbar_title: 首页
   }
 }
 
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: #94a3b8;
-  font-size: 0.75rem;
-  opacity: 0;
-  animation: fadeIn 0.6s ease-out 0.8s forwards;
-}
-
-.scroll-indicator i {
-  font-size: 1.25rem;
-  animation: bounce 2s infinite;
-}
-
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
   40% { transform: translateY(-6px); }
   60% { transform: translateY(-3px); }
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .hero-section {
     min-height: auto;
@@ -315,7 +685,7 @@ navbar_title: 首页
   }
 
   .hero-name {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 
   .hero-position {
@@ -325,19 +695,6 @@ navbar_title: 首页
   .hero-avatar {
     width: 140px;
     height: 140px;
-  }
-
-  .hero-stats {
-    gap: 0.625rem;
-  }
-
-  .stat-item {
-    min-width: 90px;
-    padding: 0.75rem 1rem;
-  }
-
-  .stat-number {
-    font-size: 1.25rem;
   }
 
   .hero-cta {
@@ -351,11 +708,27 @@ navbar_title: 首页
     max-width: 280px;
     justify-content: center;
   }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
   .hero-name {
-    font-size: 1.875rem;
+    font-size: 1.75rem;
   }
 
   .hero-avatar {
@@ -368,116 +741,293 @@ navbar_title: 首页
     padding: 0.25rem 0.625rem;
   }
 
-  .stat-item {
-    min-width: calc(50% - 0.5rem);
-    flex: 1 1 calc(50% - 0.5rem);
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .stats-card {
+    padding: 1rem 0.5rem;
+  }
+
+  .stats-number {
+    font-size: 1.5rem;
   }
 }
 </style>
 
-<!-- Hero Section -->
+<!-- ===== HERO ===== -->
 <section class="hero-section">
   <div class="hero-container">
-    <!-- Avatar -->
     <div class="hero-avatar-wrapper">
-      <img 
-        src="{{ site.data.profile.portrait_url | relative_url }}" 
-        alt="魏凯旋" 
-        class="hero-avatar"
-        onerror="this.style.display='none'"
-      >
+      <img src="{{ site.data.profile.portrait_url | relative_url }}" alt="魏凯旋" class="hero-avatar" onerror="this.style.display='none'">
     </div>
 
-    <!-- Name -->
     <h1 class="hero-name">魏凯旋</h1>
+    <div class="hero-name-en">Kaixuan Wei</div>
 
-    <!-- Position -->
-    <p class="hero-position">Senior Data Engineer</p>
+    <p class="hero-position">Data Warehouse & Big Data Engineer</p>
 
-    <!-- Subtitle -->
-    <p class="hero-subtitle">专注于 Hive、Spark、Data Warehouse 与用户画像体系建设</p>
+    <p class="hero-subtitle">
+      3+ years experience in data warehouse development and big data systems.<br>
+      Focused on ETL pipelines, user profiling systems, and data governance.
+    </p>
 
-    <!-- Tech Stack -->
     <div class="hero-tech-stack">
       <span class="tech-chip">Hive</span>
-      <span class="tech-chip">Spark</span>
+      <span class="tech-chip">Spark SQL</span>
       <span class="tech-chip">Hadoop</span>
       <span class="tech-chip">DataWorks</span>
       <span class="tech-chip">Python</span>
       <span class="tech-chip">Java</span>
     </div>
 
-    <!-- Stats -->
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-number">4+</div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">200+</div>
-        <div class="stat-label">Metrics Built</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">300+</div>
-        <div class="stat-label">User Tags</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">10TB+</div>
-        <div class="stat-label">Data Processed</div>
-      </div>
-    </div>
-
-    <!-- CTA Buttons -->
     <div class="hero-cta">
       <a href="/assets/files/resume.pdf" class="btn-primary" target="_blank">
-        <i class="fas fa-file-alt"></i>
-        View Resume
+        <i class="fas fa-file-alt"></i> View Resume
+      </a>
+      <a href="#projects" class="btn-secondary">
+        <i class="fas fa-briefcase"></i> Projects
       </a>
       <a href="https://github.com/leech2514" class="btn-secondary" target="_blank" rel="noopener">
-        <i class="fab fa-github"></i>
-        GitHub
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="#contact" class="btn-secondary">
+        <i class="fas fa-envelope"></i> Contact
       </a>
     </div>
   </div>
 
-  <!-- Scroll Indicator -->
   <div class="scroll-indicator">
     <span>向下滚动</span>
     <i class="fas fa-chevron-down"></i>
   </div>
 </section>
 
-<!-- Main Content -->
-<div class="row">
-    <div class="col-lg-3 col-md-4">
-        {% include widgets/profile_card_mini.html %}
+<!-- ===== STATS ===== -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stats-card">
+      <div class="stats-number">3+</div>
+      <div class="stats-label">Years Experience</div>
     </div>
-    <div class="col-lg-9 col-md-8">
-
-        {% include widgets/profile_card_bio_only.html %}
-
-        <!-- Debugging widgets -->
-        {% include widgets/debug_repo_name.html %}
-        {% include widgets/debug_url.html %}
-
-        {% if site.data.display.homepage.show_experience %}
-            {% include widgets/experience_card.html %}
-        {% endif %}
-
-        {% if site.data.display.homepage.show_news %}
-        {% assign count_news = site.news | size %}
-        {% if count_news > 0 %}
-        {% include widgets/news_card.html limit=site.data.display.homepage.num_news %}
-        {% endif %}
-        {% endif %}
-
-        {% if site.data.display.homepage.show_selected_publications %}
-        {% assign pubs = site.publications | sort: "date" | reverse | where: "selected", true %}
-        {%
-        include widgets/publication_card.html
-        publications=pubs
-        title='<i class="fas fa-star"></i> Selected Publications'
-        %}
-        {% endif %}
+    <div class="stats-card">
+      <div class="stats-number">100+</div>
+      <div class="stats-label">ETL Pipelines</div>
     </div>
-</div>
+    <div class="stats-card">
+      <div class="stats-number">20+</div>
+      <div class="stats-label">Data Projects</div>
+    </div>
+    <div class="stats-card">
+      <div class="stats-number">TB+</div>
+      <div class="stats-label">Data Processed</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ME ===== -->
+<section class="section about-section-bg" id="about">
+  <div class="section-inner">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-subtitle">数据工程师 · 专注于数据仓库与大数据体系建设</p>
+
+    <div class="about-content">
+      <p>
+        我目前从事<strong>数据仓库与大数据开发</strong>相关工作，主要负责离线数仓建设、ETL 开发以及用户画像系统设计。
+      </p>
+      <p>
+        在过去的项目中，我参与了从 <strong>ODS → DWD → DWS → ADS</strong> 的完整数仓建设流程，
+        并基于 <strong>Hive</strong> 与 <strong>Spark SQL</strong> 构建数据处理链路。
+      </p>
+      <p>
+        我更关注数据如何真正服务业务决策，而不仅仅是数据处理本身。通过建立标准化的指标体系与用户标签体系，
+        帮助业务团队实现精准营销与用户增长分析。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section class="section skills-section-bg" id="skills">
+  <div class="section-inner">
+    <h2 class="section-title">Skills</h2>
+    <p class="section-subtitle">技术栈与工具链</p>
+
+    <div class="skills-grid">
+      <div class="skill-category-card">
+        <div class="skill-category-title">
+          <i class="fas fa-database"></i> Data Warehouse
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Hive</span>
+          <span class="skill-tag">Spark SQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">ClickHouse</span>
+        </div>
+      </div>
+
+      <div class="skill-category-card">
+        <div class="skill-category-title">
+          <i class="fas fa-server"></i> Big Data Ecosystem
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Hadoop</span>
+          <span class="skill-tag">HDFS</span>
+          <span class="skill-tag">Yarn</span>
+          <span class="skill-tag">Kafka</span>
+        </div>
+      </div>
+
+      <div class="skill-category-card">
+        <div class="skill-category-title">
+          <i class="fas fa-cloud"></i> Platform
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">DataWorks</span>
+          <span class="skill-tag">MaxCompute</span>
+          <span class="skill-tag">DMS</span>
+        </div>
+      </div>
+
+      <div class="skill-category-card">
+        <div class="skill-category-title">
+          <i class="fas fa-code"></i> Programming
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section class="section projects-section-bg" id="projects">
+  <div class="section-inner">
+    <h2 class="section-title">Projects</h2>
+    <p class="section-subtitle">核心项目与实战成果</p>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="project-title">用户画像系统</div>
+        <div class="project-desc">
+          构建用户标签体系，覆盖行为数据分析和人群圈选能力，支持精准营销与增长分析。
+        </div>
+        <div class="project-tech">
+          <span class="project-tech-tag">Hive</span>
+          <span class="project-tech-tag">Spark SQL</span>
+        </div>
+        <div class="project-links">
+          <a href="#"><i class="fas fa-external-link-alt"></i> 详情</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">
+          <i class="fas fa-layer-group"></i>
+        </div>
+        <div class="project-title">数据仓库体系建设</div>
+        <div class="project-desc">
+          参与 ODS → DWD → DWS → ADS 完整数仓建设，负责指标体系设计与数据模型建设。
+        </div>
+        <div class="project-tech">
+          <span class="project-tech-tag">Hive</span>
+          <span class="project-tech-tag">Data Warehouse</span>
+        </div>
+        <div class="project-links">
+          <a href="#"><i class="fas fa-external-link-alt"></i> 详情</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="project-title">数据治理平台</div>
+        <div class="project-desc">
+          搭建数据质量监控体系，实现任务调度告警与数据一致性校验，保障数据可靠性。
+        </div>
+        <div class="project-tech">
+          <span class="project-tech-tag">Hadoop</span>
+          <span class="project-tech-tag">ETL</span>
+        </div>
+        <div class="project-links">
+          <a href="#"><i class="fas fa-external-link-alt"></i> 详情</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section class="section experience-section-bg" id="experience">
+  <div class="section-inner">
+    <h2 class="section-title">Experience</h2>
+    <p class="section-subtitle">工作经历与成长路径</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2022 - Present</div>
+          <div class="timeline-title">大数据开发工程师</div>
+          <div class="timeline-company">深圳金贝联数据技术有限公司</div>
+          <ul class="timeline-list">
+            <li>负责用户域模型构建与业务指标开发</li>
+            <li>开发统计型和规则型用户标签体系</li>
+            <li>构建 ETL 管道并维护数据仓库分层</li>
+            <li>参与平台性能优化与数据治理工作</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2021 - 2022</div>
+          <div class="timeline-title">大数据开发实习生</div>
+          <div class="timeline-company">深圳金贝联数据技术有限公司</div>
+          <ul class="timeline-list">
+            <li>协助数据仓库开发与 ETL 流程处理</li>
+            <li>参与指标开发与数据集成项目</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section contact-section-bg" id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-subtitle">欢迎交流与合作</p>
+
+    <div class="contact-grid">
+      <a href="mailto:{{ site.data.profile.email }}" class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <div class="contact-card-title">Email</div>
+        <div class="contact-card-value">{{ site.data.profile.email }}</div>
+      </a>
+
+      <a href="tel:{{ site.data.profile.phone }}" class="contact-card">
+        <i class="fas fa-phone"></i>
+        <div class="contact-card-title">Phone</div>
+        <div class="contact-card-value">{{ site.data.profile.phone }}</div>
+      </a>
+
+      <a href="/assets/files/resume.pdf" target="_blank" class="contact-card">
+        <i class="fas fa-file-alt"></i>
+        <div class="contact-card-title">Resume</div>
+        <div class="contact-card-value">查看简历</div>
+      </a>
+    </div>
+  </div>
+</section>
