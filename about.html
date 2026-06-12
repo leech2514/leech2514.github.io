@@ -1,0 +1,289 @@
+---
+layout: default
+title : 关于我
+navbar_title: 关于我
+permalink: /about/
+container_class: container-xl
+---
+
+<style>
+.about-page {
+  padding: 3rem 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.about-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 0.75rem;
+}
+
+.about-hero p {
+  color: #475569;
+  font-size: 1.125rem;
+}
+
+.about-section {
+  margin-bottom: 2.5rem;
+}
+
+.about-section h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #E2E8F0;
+  display: inline-block;
+}
+
+.about-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px);
+  border-color: #BFDBFE;
+}
+
+.about-bio p {
+  color: #475569;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.about-bio p:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #E2E8F0;
+}
+
+.timeline-content h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0F172A;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-content .dept {
+  font-size: 0.875rem;
+  color: #475569;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-content .meta {
+  font-size: 0.8125rem;
+  color: #94A3B8;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.contact-list li:last-child {
+  border-bottom: none;
+}
+
+.contact-list i {
+  color: #2563EB;
+  width: 20px;
+  text-align: center;
+}
+
+.contact-list a {
+  color: #2563EB;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-list a:hover {
+  color: #1D4ED8;
+  text-decoration: underline;
+}
+
+.award-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.award-item:last-child {
+  border-bottom: none;
+}
+
+.award-name {
+  color: #0F172A;
+  font-weight: 500;
+}
+
+.award-date {
+  color: #94A3B8;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    padding: 2rem 1rem;
+  }
+
+  .about-hero h1 {
+    font-size: 2rem;
+  }
+}
+</style>
+
+<div class="about-page">
+  <div class="about-hero">
+    <h1>关于我</h1>
+    <p>了解我的背景、经历与专业方向</p>
+  </div>
+
+  <!-- Bio -->
+  <div class="about-section">
+    <h2>个人简介</h2>
+    <div class="about-card about-bio">
+      {{ site.data.profile.short_bio }}
+    </div>
+  </div>
+
+  <!-- Experience -->
+  {% if site.data.profile.experience %}
+  <div class="about-section">
+    <h2>工作经历</h2>
+    <div class="about-card">
+      {% for item in site.data.profile.experience %}
+      <div class="timeline-item">
+        <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="timeline-logo">
+        <div class="timeline-content">
+          <h5>{{ item.name }}</h5>
+          <div class="dept">{{ item.position }}</div>
+          <div class="meta">
+            <span>{{ item.date }}</span>
+          </div>
+          {% if item.description %}
+          <div class="mt-2 small text-muted">
+            {{ item.description }}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Education -->
+  {% if site.data.profile.education %}
+  <div class="about-section">
+    <h2>教育背景</h2>
+    <div class="about-card">
+      {% for item in site.data.profile.education %}
+      <div class="timeline-item">
+        <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="timeline-logo">
+        <div class="timeline-content">
+          <h5>{{ item.name }}</h5>
+          <div class="dept">{{ item.position }}</div>
+          <div class="meta">
+            <span>{{ item.date }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Awards -->
+  {% if site.data.profile.awards %}
+  <div class="about-section">
+    <h2>荣誉与证书</h2>
+    <div class="about-card">
+      {% for item in site.data.profile.awards %}
+      <div class="award-item">
+        <span class="award-name">{{ item.name }}</span>
+        <span class="award-date">{{ item.date }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Contact -->
+  <div class="about-section">
+    <h2>联系方式</h2>
+    <div class="about-card">
+      <ul class="contact-list">
+        {% if site.data.profile.email %}
+        <li>
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:{{ site.data.profile.email }}">{{ site.data.profile.email }}</a>
+        </li>
+        {% endif %}
+        {% if site.data.profile.phone %}
+        <li>
+          <i class="fas fa-phone"></i>
+          <span>{{ site.data.profile.phone }}</span>
+        </li>
+        {% endif %}
+        {% if site.data.profile.github %}
+        <li>
+          <i class="fab fa-github"></i>
+          <a href="https://github.com/{{ site.data.profile.github }}" target="_blank" rel="noopener">github.com/{{ site.data.profile.github }}</a>
+        </li>
+        {% endif %}
+        {% if site.data.profile.linkedin %}
+        <li>
+          <i class="fab fa-linkedin"></i>
+          <a href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>

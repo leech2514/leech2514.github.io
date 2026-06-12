@@ -1,16 +1,33 @@
 ---
 layout: blog_post
-title: 'Acknowledgement'
+title: '用户画像标签系统建设'
 date: 2026-03-17
 tags:
-  - Blog
-  - Post
-  - Tag
+  - 项目
+  - 用户画像
+  - 数据工程
 ---
 
+近期完成了大规模用户画像与标签系统的建设工作，该系统为精准营销和业务决策提供了有力支持。
 
-Thanks to [Yuqing Xie](https://yqxie99.github.io/) and [Kun Chen](https://kwen-chen.github.io/) for the contributions of the blog feature!
+## 项目背景
 
-## Section 1
+与业务团队紧密合作，定义用户维度、指标及标签标准，将业务需求转化为可扩展的数据资产。
 
+## 技术实现
 
+基于 Hive SQL、Spark SQL 构建标签生产流水线：
+
+- 开发 50+ 统计标签（用户活跃度评分、生命周期分类等）
+- 开发 30+ 规则标签（基于 RFM 的客户分层等）
+- 建立 ETL 监控与数据质量检查机制
+
+## 项目成果
+
+- 优化标签生产流水线，处理延迟降低约 2 小时
+- 广告点击率提升 50%
+- 转化率提升 30%
+
+---
+
+*Yoho @ 2026*

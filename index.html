@@ -1,9 +1,453 @@
 ---
 layout: default
 title : Homepage
-navbar_title: Home
+navbar_title: 首页
 ---
 
+<style>
+/* ===== Hero Section ===== */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem 4rem;
+  background: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 120%;
+  background: radial-gradient(ellipse, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 50%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-container {
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Avatar */
+.hero-avatar-wrapper {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.1s forwards;
+}
+
+.hero-avatar-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%);
+  z-index: -1;
+}
+
+.hero-avatar-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%);
+  filter: blur(12px);
+  opacity: 0.35;
+  z-index: -2;
+  transition: opacity 0.3s ease;
+}
+
+.hero-avatar-wrapper:hover::after {
+  opacity: 0.55;
+}
+
+.hero-avatar-wrapper:hover .hero-avatar {
+  transform: scale(1.05);
+}
+
+.hero-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Name */
+.hero-name {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  opacity: 0;
+  animation: slideUp 0.6s ease-out 0.2s forwards;
+}
+
+/* Position */
+.hero-position {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2563EB;
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  animation: slideUp 0.6s ease-out 0.3s forwards;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: 1rem;
+  color: #475569;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  animation: slideUp 0.6s ease-out 0.35s forwards;
+}
+
+/* Tech Stack */
+.hero-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: slideUp 0.6s ease-out 0.4s forwards;
+}
+
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.875rem;
+  background: #eff6ff;
+  color: #2563EB;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  border: 1px solid #dbeafe;
+  transition: all 0.2s ease;
+}
+
+.tech-chip:hover {
+  background: #2563EB;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+/* Stats */
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: slideUp 0.6s ease-out 0.45s forwards;
+}
+
+.stat-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  min-width: 110px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  border-color: #bfdbfe;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+  transform: translateY(-2px);
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2563EB;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #64748B;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* CTA Buttons */
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: slideUp 0.6s ease-out 0.5s forwards;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 0.625rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: transparent;
+  color: #0F172A;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 0.625rem;
+  text-decoration: none;
+  border: 1.5px solid #CBD5E1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #F8FAFC;
+  border-color: #2563EB;
+  color: #2563EB;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.1);
+  text-decoration: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.8s forwards;
+}
+
+.scroll-indicator i {
+  font-size: 1.25rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+  60% { transform: translateY(-3px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: auto;
+    padding: 5rem 1rem 3rem;
+  }
+
+  .hero-name {
+    font-size: 2.25rem;
+  }
+
+  .hero-position {
+    font-size: 1.1rem;
+  }
+
+  .hero-avatar {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-stats {
+    gap: 0.625rem;
+  }
+
+  .stat-item {
+    min-width: 90px;
+    padding: 0.75rem 1rem;
+  }
+
+  .stat-number {
+    font-size: 1.25rem;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-name {
+    font-size: 1.875rem;
+  }
+
+  .hero-avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .tech-chip {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+  }
+
+  .stat-item {
+    min-width: calc(50% - 0.5rem);
+    flex: 1 1 calc(50% - 0.5rem);
+  }
+}
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-container">
+    <!-- Avatar -->
+    <div class="hero-avatar-wrapper">
+      <img 
+        src="{{ site.data.profile.portrait_url | relative_url }}" 
+        alt="魏凯旋" 
+        class="hero-avatar"
+        onerror="this.style.display='none'"
+      >
+    </div>
+
+    <!-- Name -->
+    <h1 class="hero-name">魏凯旋</h1>
+
+    <!-- Position -->
+    <p class="hero-position">Senior Data Engineer</p>
+
+    <!-- Subtitle -->
+    <p class="hero-subtitle">专注于 Hive、Spark、Data Warehouse 与用户画像体系建设</p>
+
+    <!-- Tech Stack -->
+    <div class="hero-tech-stack">
+      <span class="tech-chip">Hive</span>
+      <span class="tech-chip">Spark</span>
+      <span class="tech-chip">Hadoop</span>
+      <span class="tech-chip">DataWorks</span>
+      <span class="tech-chip">Python</span>
+      <span class="tech-chip">Java</span>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">4+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">200+</div>
+        <div class="stat-label">Metrics Built</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">300+</div>
+        <div class="stat-label">User Tags</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">10TB+</div>
+        <div class="stat-label">Data Processed</div>
+      </div>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="hero-cta">
+      <a href="/assets/files/resume.pdf" class="btn-primary" target="_blank">
+        <i class="fas fa-file-alt"></i>
+        View Resume
+      </a>
+      <a href="https://github.com/leech2514" class="btn-secondary" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <span>向下滚动</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- Main Content -->
 <div class="row">
     <div class="col-lg-3 col-md-4">
         {% include widgets/profile_card_mini.html %}

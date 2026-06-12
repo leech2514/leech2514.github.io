@@ -1,18 +1,301 @@
-<nav class="navbar navbar-expand-sm navbar-light fixed-top mb-5 shadow-sm">
-    <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
-        <a class="navbar-brand"><strong>{{site.data.profile.navbar_name}}</strong></a>
-        <button class="navbar-toggler" style="font-size: 1em; padding: 0.5em;" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-map"></i> Menu
-        </button>
+<header class="site-header" id="siteHeader">
+  <div class="header-container">
+    <!-- Logo -->
+    <a class="header-logo" href="{{ '/' | relative_url }}">
+      <span class="logo-text">{{site.data.profile.navbar_name}}</span>
+    </a>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                {% for item in site.data.navigation.pages %}
-                <li class="nav-item {% if item.name == page.navbar_title or include.active_page == item.name %}active{% endif %}">
-                    <a class="nav-link" href="{{ item.url | relative_url }}">{{ item.name }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+    <!-- Mobile Toggle -->
+    <button class="header-toggle" id="headerToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+      <i class="fas fa-bars" id="toggleIcon"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="header-nav" id="headerNav">
+      <ul class="nav-list">
+        {% for item in site.data.navigation.pages %}
+        <li class="nav-item {% if item.name == page.navbar_title or include.active_page == item.name %}active{% endif %}">
+          <a class="nav-link" href="{{ item.url | relative_url }}">{{ item.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <!-- CTA -->
+    <div class="header-cta">
+      <a href="{{ '/assets/files/resume.pdf' | relative_url }}" class="resume-btn" target="_blank" rel="noopener">
+        查看简历
+      </a>
     </div>
-</nav>
+  </div>
+</header>
+
+<style>
+/* Offset body for fixed header */
+body {
+  padding-top: 72px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 64px;
+  }
+}
+
+/* ===== Site Header ===== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #eee;
+  z-index: 1030;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.header-logo {
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.header-logo:hover {
+  text-decoration: none;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+}
+
+.header-logo:hover .logo-text {
+  color: #2563EB;
+}
+
+/* Toggle (Mobile) */
+.header-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #475569;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.header-toggle:hover {
+  color: #2563EB;
+  background: #f1f5f9;
+}
+
+/* Navigation */
+.header-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #475569;
+  text-decoration: none;
+  border-radius: 0.375rem;
+  transition: color 0.2s ease, background 0.2s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #2563EB;
+  transition: width 0.3s ease, left 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover {
+  color: #2563EB;
+  text-decoration: none;
+}
+
+.nav-link:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+.nav-item.active .nav-link {
+  color: #2563EB;
+  font-weight: 600;
+}
+
+.nav-item.active .nav-link::after {
+  width: 60%;
+  left: 20%;
+}
+
+/* CTA */
+.header-cta {
+  flex-shrink: 0;
+}
+
+.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2563EB;
+  background: #eff6ff;
+  border: 1.5px solid #bfdbfe;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.resume-btn:hover {
+  color: #ffffff;
+  background: #2563EB;
+  border-color: #2563EB;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .site-header {
+    height: 64px;
+  }
+
+  .header-toggle {
+    display: block;
+    order: 3;
+  }
+
+  .header-logo {
+    order: 1;
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .header-nav {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #eee;
+    padding: 0.75rem 1.5rem 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    justify-content: flex-start;
+  }
+
+  .header-nav.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.125rem;
+  }
+
+  .nav-link {
+    padding: 0.75rem 0.5rem;
+    width: 100%;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .nav-item.active .nav-link {
+    background: #eff6ff;
+    border-radius: 0.375rem;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var header = document.getElementById('siteHeader');
+  var toggle = document.getElementById('headerToggle');
+  var nav = document.getElementById('headerNav');
+  var icon = document.getElementById('toggleIcon');
+
+  // Scroll effect
+  function onScroll() {
+    if (window.scrollY > 10) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile toggle
+  if (toggle && nav) {
+    toggle.addEventListener('click', function() {
+      var isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (icon) {
+        icon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+      }
+    });
+  }
+})();
+</script>

@@ -1,0 +1,541 @@
+---
+layout: default
+title : 文档资源
+navbar_title: 资源库
+permalink: /files/
+container_class: container-xl
+---
+
+<style>
+:root {
+  --primary-color: #2563EB;
+  --primary-dark: #1D4ED8;
+  --secondary-color: #3B82F6;
+  --bg-gray: #f8fafc;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --border-color: #E2E8F0;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.files-page {
+  padding: 2rem 0;
+  background: var(--bg-gray);
+  min-height: 100vh;
+}
+
+.files-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Hero Section */
+.files-hero {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.files-hero h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.files-hero p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.files-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.25rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+}
+
+/* Search & Filter */
+.search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 2.75rem;
+  border: 2px solid var(--border-color);
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.search-box i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.tag-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag-filter-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 2rem;
+  background: white;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tag-filter-btn:hover,
+.tag-filter-btn.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* Tag Cloud */
+.tag-cloud {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.tag-cloud h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tag-cloud-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-cloud-tag {
+  padding: 0.4rem 0.875rem;
+  background: var(--bg-gray);
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tag-cloud-tag:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Document Grid */
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 1.25rem;
+  background: linear-gradient(180deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border-radius: 2px;
+}
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .doc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .doc-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Document Card */
+.doc-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.doc-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.doc-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.doc-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.doc-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.doc-meta {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.doc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+.doc-tag {
+  padding: 0.2rem 0.6rem;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+  border-radius: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.doc-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.doc-btn {
+  flex: 1;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.625rem;
+  font-size: 0.825rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.doc-btn-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  border: none;
+}
+
+.doc-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.doc-btn-outline {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
+}
+
+.doc-btn-outline:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.no-results i {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.no-results h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .files-hero {
+    padding: 2rem 1rem;
+  }
+
+  .files-hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .files-stats {
+    gap: 0.75rem;
+  }
+
+  .stat-item {
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  .tag-filters {
+    justify-content: flex-start;
+  }
+}
+</style>
+
+<div class="files-page">
+  <div class="files-container">
+    <!-- Hero Section -->
+    <div class="files-hero">
+      <h1>📚 文档资源</h1>
+      <p>记录我的数据仓库设计、大数据开发经验、SQL优化案例、项目总结和技术笔记</p>
+      <div class="files-stats">
+        <div class="stat-item">
+          <i class="fas fa-file-alt"></i>
+          <span>文档总数：{{ site.files.size }}</span>
+        </div>
+        <div class="stat-item">
+          <i class="fas fa-tag"></i>
+          <span>标签数量：7</span>
+        </div>
+        <div class="stat-item">
+          <i class="fas fa-clock"></i>
+          <span>最近更新：2026-05-30</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="search-bar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="搜索文档..." oninput="filterDocs()">
+      </div>
+      <div class="tag-filters" id="tagFilters">
+        <button class="tag-filter-btn active" data-tag="all" onclick="selectTag('all')">全部</button>
+        <button class="tag-filter-btn" data-tag="知识库" onclick="selectTag('知识库')">知识库</button>
+        <button class="tag-filter-btn" data-tag="简历" onclick="selectTag('简历')">简历</button>
+        <button class="tag-filter-btn" data-tag="技术文档" onclick="selectTag('技术文档')">技术文档</button>
+        <button class="tag-filter-btn" data-tag="数据工程" onclick="selectTag('数据工程')">数据工程</button>
+      </div>
+    </div>
+
+    <!-- Tag Cloud -->
+    <div class="tag-cloud">
+      <h3><i class="fas fa-tags"></i> 技术标签云</h3>
+      <div class="tag-cloud-tags">
+        <span class="tag-cloud-tag" onclick="selectTag('Hive')">Hive</span>
+        <span class="tag-cloud-tag" onclick="selectTag('Spark')">Spark</span>
+        <span class="tag-cloud-tag" onclick="selectTag('Flink')">Flink</span>
+        <span class="tag-cloud-tag" onclick="selectTag('DataX')">DataX</span>
+        <span class="tag-cloud-tag" onclick="selectTag('DolphinScheduler')">DolphinScheduler</span>
+        <span class="tag-cloud-tag" onclick="selectTag('Hadoop')">Hadoop</span>
+        <span class="tag-cloud-tag" onclick="selectTag('SQL')">SQL</span>
+        <span class="tag-cloud-tag" onclick="selectTag('ETL')">ETL</span>
+        <span class="tag-cloud-tag" onclick="selectTag('数据仓库')">数据仓库</span>
+      </div>
+    </div>
+
+    <!-- Documents Grid -->
+    <h2 class="section-title">全部文档</h2>
+    <div class="doc-grid" id="docGrid">
+      {% for file in site.files %}
+      <div class="doc-card"
+           data-title="{{ file.title | downcase }}"
+           data-desc="{{ file.description | downcase }}"
+           data-tags="{% if file.tags %}{{ file.tags | join: ',' | downcase }}{% endif %}">
+        <div class="doc-icon">
+          <i class="fas fa-file-code"></i>
+        </div>
+        <h3 class="doc-title">{{ file.title }}</h3>
+        <p class="doc-desc">{{ file.description }}</p>
+        <div class="doc-meta">
+          <i class="far fa-calendar-alt"></i>
+          {{ file.date | date: "%Y-%m-%d" }}
+        </div>
+        <div class="doc-tags">
+          {% for tag in file.tags %}
+          <span class="doc-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        <div class="doc-actions">
+          {% if file.pdf_url %}
+          <a href="{{ file.pdf_url }}"
+             class="doc-btn doc-btn-primary"
+             target="_blank" rel="noopener">
+            <i class="fas fa-eye"></i>
+            预览PDF
+          </a>
+          <a href="{{ file.pdf_url }}"
+             class="doc-btn doc-btn-outline"
+             target="_blank" rel="noopener"
+             download>
+            <i class="fas fa-download"></i>
+            下载PDF
+          </a>
+          {% elsif file.feishu_url %}
+          <a href="{{ file.feishu_url }}"
+             class="doc-btn doc-btn-primary"
+             target="_blank" rel="noopener">
+            <i class="fas fa-external-link-alt"></i>
+            飞书原文
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- No Results -->
+    <div class="no-results" id="noResults" style="display: none;">
+      <i class="fas fa-search"></i>
+      <h3>没有找到匹配的文档</h3>
+      <p>尝试调整搜索词或筛选条件</p>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentTag = 'all';
+
+function selectTag(tag) {
+  currentTag = tag;
+
+  document.querySelectorAll('.tag-filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.dataset.tag === tag) {
+      btn.classList.add('active');
+    }
+  });
+
+  filterDocs();
+}
+
+function filterDocs() {
+  const searchText = document.getElementById('searchInput').value.toLowerCase();
+  const cards = document.querySelectorAll('#docGrid .doc-card');
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const title = card.dataset.title || '';
+    const desc = card.dataset.desc || '';
+    const tags = card.dataset.tags || '';
+
+    const matchesSearch = title.includes(searchText) || desc.includes(searchText);
+    const matchesTag = currentTag === 'all' || tags.includes(currentTag.toLowerCase());
+
+    if (matchesSearch && matchesTag) {
+      card.style.display = '';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  filterDocs();
+});
+</script>
